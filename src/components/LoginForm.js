@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions/index';
-import { Card, CardSection, Input, Button } from './common/index';
+import { Card, CardSection, Input, Button, Spinner } from './common/index';
 
 class LoginForm extends Component {
   onEmailChange = text => {
@@ -25,6 +25,14 @@ class LoginForm extends Component {
           <Text style={styles.errorStyle}>{this.props.error}</Text>
         </View>
       );
+    }
+  };
+
+  renderButton = () => {
+    if (this.props.loading) {
+      return <Spinner />;
+    } else {
+      return <Button onPress={this.onButtonPress}>Log In</Button>;
     }
   };
 
@@ -52,9 +60,7 @@ class LoginForm extends Component {
 
         {this.renderError()}
 
-        <CardSection>
-          <Button onPress={this.onButtonPress}>Log In</Button>
-        </CardSection>
+        <CardSection>{this.renderButton()}</CardSection>
       </Card>
     );
   }
@@ -72,7 +78,8 @@ const mapStateToProps = state => {
   return {
     email: state.auth.email,
     password: state.auth.password,
-    error: state.auth.error
+    error: state.auth.error,
+    loading: state.auth.loading
   };
 };
 
