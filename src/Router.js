@@ -8,9 +8,9 @@ const RouterComponent = () => {
   return (
     <Router>
       <Scene key="root" hideNavBar>
-        {/* <Scene key="auth">
+        <Scene key="auth">
           <Scene key="login" component={LoginForm} title="Please Log In" />
-        </Scene> */}
+        </Scene>
         <Scene key="main">
           <Scene
             rightTitle="Add"
@@ -24,7 +24,6 @@ const RouterComponent = () => {
             key="employeeCreate"
             component={EmployeeCreate}
             title="Create Employee"
-            initial
           />
         </Scene>
       </Scene>
